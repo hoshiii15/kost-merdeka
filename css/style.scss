@@ -15,7 +15,7 @@ $transition: all 0.3s ease;
 
 html {
     font-size: 16px;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
 }
 
 body {
@@ -23,639 +23,637 @@ body {
     color: $text-color;
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    color: $primary-color;
-    
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
-}
-
-// Hero Section
-.hero {
+// Opening Section with Cloud Reveal Animation
+.opening-section {
     position: relative;
     height: 100vh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     
-    &__background {
+    // Sky Background (initial state - use custom image)
+    .sky-bg {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, rgba(44, 62, 80, 0.8), rgba(231, 76, 60, 0.6)),
-                    url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1920&h=1080&fit=crop') center/cover;
-        z-index: -1;
+        background: url('../assets/images/langit.jpg') center/cover no-repeat;
+        z-index: 1;
+        will-change: opacity;
     }
     
-    &__content {
-        text-align: center;
-        color: $white;
-        z-index: 2;
-    }
-    
-    &__title {
-        font-size: 5rem;
-        font-weight: 900;
-        line-height: 1.1;
-        margin-bottom: 1rem;
-        
-        @media (max-width: 768px) {
-            font-size: 3rem;
-        }
-        
-        &-line {
-            display: block;
-            overflow: hidden;
-            
-            &:first-child {
-                color: $white;
-            }
-            
-            &:last-child {
-                color: $accent-color;
-            }
-        }
-    }
-    
-    &__subtitle {
-        font-size: 1.5rem;
-        font-weight: 300;
-        letter-spacing: 2px;
-        opacity: 0.9;
-        
-        @media (max-width: 768px) {
-            font-size: 1.2rem;
-        }
-    }
-    
-    &__scroll-indicator {
+    // City Background (revealed on scroll)
+    .city-bg {
         position: absolute;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        color: $white;
-        font-size: 0.9rem;
-        
-        .scroll-arrow {
-            width: 30px;
-            height: 50px;
-            border: 2px solid $white;
-            border-radius: 15px;
-            margin: 0.5rem auto;
-            position: relative;
-            
-            &::before {
-                content: '';
-                position: absolute;
-                top: 8px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 6px;
-                height: 6px;
-                background: $white;
-                border-radius: 50%;
-                animation: scroll-down 2s infinite;
-            }
-        }
-    }
-}
-
-@keyframes scroll-down {
-    0% {
-        top: 8px;
-        opacity: 1;
-    }
-    100% {
-        top: 30px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+                    url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&h=1080&fit=crop') center/cover;
+        z-index: 2;
         opacity: 0;
+        will-change: opacity;
     }
-}
-
-// Intro Section
-.intro {
-    padding: 8rem 0;
-    background: $white;
     
-    &__content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
+    // Side Images Layout
+    .side-images {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+        display: flex;
         align-items: center;
+        justify-content: space-between;
+        padding: 0 8%;
         
         @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-            gap: 2rem;
+            padding: 0 5%;
         }
     }
     
-    &__text {
-        .section-title {
-            margin-bottom: 1.5rem;
-        }
-    }
-    
-    &__description {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        margin-bottom: 1.5rem;
-        color: #555;
-    }
-    
-    &__image {
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    .side-image {
+        position: relative;
+        width: 350px;
+        height: 500px;
+        will-change: transform, opacity;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
         
-        img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-            
-            &:hover {
-                transform: scale(1.05);
-            }
+        @media (max-width: 1200px) {
+            width: 300px;
+            height: 420px;
         }
-    }
-}
-
-// Fasilitas Section (Horizontal Scroll)
-.fasilitas {
-    padding: 6rem 0;
-    background: $light-bg;
-    overflow: hidden;
-    
-    &__title {
-        text-align: center;
-        margin-bottom: 3rem;
-    }
-    
-    &__wrapper {
-        overflow: hidden;
-        padding: 2rem 0;
-    }
-    
-    &__scroll-container {
-        display: flex;
-        gap: 2rem;
-        padding: 0 2rem;
-        will-change: transform;
-    }
-    
-    &__item {
-        flex: 0 0 400px;
-        background: $white;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        transition: $transition;
         
-        &:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        @media (max-width: 768px) {
+            width: 180px;
+            height: 280px;
         }
-    }
-    
-    &__image {
-        width: 100%;
-        height: 250px;
-        overflow: hidden;
         
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        &:hover img {
-            transform: scale(1.1);
-        }
-    }
-    
-    &__info {
-        padding: 1.5rem;
-        
-        h3 {
-            font-size: 1.3rem;
-            color: $primary-color;
-            margin-bottom: 0.5rem;
-        }
-        
-        p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-    }
-}
-
-// Kamar Section
-.kamar {
-    padding: 8rem 0;
-    background: $white;
-    
-    .section-title {
-        text-align: center;
-        margin-bottom: 4rem;
-    }
-    
-    &__item {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        margin-bottom: 6rem;
-        align-items: center;
-        
-        @media (max-width: 968px) {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-        
-        &--reverse {
-            .kamar__image-wrapper {
-                order: 2;
-                
-                @media (max-width: 968px) {
-                    order: 1;
-                }
-            }
-            
-            .kamar__info {
-                order: 1;
-                
-                @media (max-width: 968px) {
-                    order: 2;
-                }
-            }
-        }
-    }
-    
-    &__image-wrapper {
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        height: 400px;
-    }
-    
-    &__image-reveal {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        clip-path: inset(0 100% 0 0);
-    }
-    
-    &__image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: scale(1.2);
-    }
-    
-    &__info {
-        padding: 2rem;
-    }
-    
-    &__name {
-        font-size: 2rem;
-        color: $primary-color;
-        margin-bottom: 0.5rem;
-    }
-    
-    &__size {
-        font-size: 1.1rem;
-        color: #666;
-        margin-bottom: 1.5rem;
-    }
-    
-    &__features {
-        list-style: none;
-        margin-bottom: 2rem;
-        
-        li {
-            padding: 0.5rem 0;
-            padding-left: 2rem;
-            position: relative;
-            font-size: 1.05rem;
-            
-            &::before {
-                content: '✓';
-                position: absolute;
-                left: 0;
-                color: $accent-color;
-                font-weight: bold;
-                font-size: 1.2rem;
-            }
-        }
-    }
-    
-    &__price {
-        font-size: 2rem;
-        font-weight: 700;
-        color: $accent-color;
-        
-        span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #666;
-        }
-    }
-}
-
-// Lokasi Section
-.lokasi {
-    padding: 8rem 0;
-    background: $light-bg;
-    
-    .section-title {
-        text-align: center;
-        margin-bottom: 4rem;
-    }
-    
-    &__content {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr;
-        gap: 4rem;
-        align-items: start;
-        
-        @media (max-width: 968px) {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-        }
-    }
-    
-    &__map {
-        position: relative;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        
-        img {
-            width: 100%;
-            height: auto;
+            border-radius: 15px;
             display: block;
         }
     }
     
-    &__pins {
+    // Center Anchor Image
+    .anchor-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+        width: 450px;
+        height: 650px;
+        will-change: transform, opacity;
+        filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.25));
+        
+        @media (max-width: 1200px) {
+            width: 380px;
+            height: 550px;
+        }
+        
+        @media (max-width: 768px) {
+            width: 250px;
+            height: 380px;
+        }
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            display: block;
+        }
+    }
+    
+    // Cloud Layer (multiple small clouds scattered)
+    .cloud-layer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60%;
+        z-index: 5;
+        pointer-events: none;
+        will-change: transform, opacity;
+    }
+    
+    .cloud {
+        position: absolute;
+        opacity: 0.85;
+        will-change: transform, opacity;
+        
+        // Cloud 1 - Bottom left
+        &.cloud-1 {
+            bottom: -10%;
+            left: 5%;
+            width: 400px;
+            transform: scale(1.2);
+            
+            @media (max-width: 768px) {
+                width: 250px;
+            }
+        }
+        
+        // Cloud 2 - Bottom center-left
+        &.cloud-2 {
+            bottom: -5%;
+            left: 25%;
+            width: 350px;
+            transform: scale(0.9) scaleX(-1);
+            
+            @media (max-width: 768px) {
+                width: 220px;
+            }
+        }
+        
+        // Cloud 3 - Bottom center
+        &.cloud-3 {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scale(1.1);
+            width: 450px;
+            
+            @media (max-width: 768px) {
+                width: 280px;
+            }
+        }
+        
+        // Cloud 4 - Bottom center-right
+        &.cloud-4 {
+            bottom: -5%;
+            right: 25%;
+            width: 350px;
+            transform: scale(0.95);
+            
+            @media (max-width: 768px) {
+                width: 220px;
+            }
+        }
+        
+        // Cloud 5 - Bottom right
+        &.cloud-5 {
+            bottom: -10%;
+            right: 5%;
+            width: 400px;
+            transform: scale(1.15) scaleX(-1);
+            
+            @media (max-width: 768px) {
+                width: 250px;
+            }
+        }
+        
+        // Cloud 6 - Mid left
+        &.cloud-6 {
+            bottom: 20%;
+            left: 10%;
+            width: 300px;
+            opacity: 0.6;
+            transform: scale(0.8);
+            
+            @media (max-width: 768px) {
+                width: 180px;
+            }
+        }
+        
+        // Cloud 7 - Mid right
+        &.cloud-7 {
+            bottom: 25%;
+            right: 12%;
+            width: 280px;
+            opacity: 0.55;
+            transform: scale(0.75) scaleX(-1);
+            
+            @media (max-width: 768px) {
+                width: 170px;
+            }
+        }
+        
+        // Cloud 8 - Mid center
+        &.cloud-8 {
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%) scale(0.7);
+            width: 320px;
+            opacity: 0.5;
+            
+            @media (max-width: 768px) {
+                width: 200px;
+            }
+        }
+    }
+    
+    // Opening Labels (KOST & MERDEKA - top corners)
+    .opening-labels {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        z-index: 6;
+        pointer-events: none;
+        
+        h1 {
+            position: absolute;
+            top: 60px;
+            font-size: 6rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.95);
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            text-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            will-change: opacity;
+            
+            @media (max-width: 1200px) {
+                font-size: 4.5rem;
+                top: 50px;
+            }
+            
+            @media (max-width: 768px) {
+                font-size: 3rem;
+                top: 40px;
+            }
+        }
+        
+        .label-kost {
+            left: 80px;
+            
+            @media (max-width: 768px) {
+                left: 40px;
+            }
+        }
+        
+        .label-merdeka {
+            right: 80px;
+            
+            @media (max-width: 768px) {
+                right: 40px;
+            }
+        }
     }
     
-    &__pin {
+    // Scroll Indicator
+    .scroll-indicator {
         position: absolute;
-        transform: translate(-50%, -50%);
-        cursor: pointer;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        will-change: opacity;
+        animation: bounce 2s infinite;
         
-        .pin-dot {
-            width: 20px;
-            height: 20px;
-            background: $accent-color;
-            border: 3px solid $white;
-            border-radius: 50%;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-            position: relative;
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -10px); }
+        }
+        
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border-right: 3px solid rgba(255, 255, 255, 0.9);
+            border-bottom: 3px solid rgba(255, 255, 255, 0.9);
+            transform: rotate(45deg);
+        }
+        
+        span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+
+// Cinematic Location & Room Section
+.cinematic-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    
+    // Background Salatiga
+    .cinematic-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+                    url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&h=1080&fit=crop') center/cover;
+        z-index: 1;
+        will-change: opacity;
+    }
+    
+    // Cinematic Labels (KOST & MERDEKA text)
+    .cinematic-labels {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5%;
+        z-index: 10;
+        pointer-events: none;
+        
+        h1 {
+            font-size: 8rem;
+            font-weight: 900;
+            color: $white;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
             opacity: 0;
-            transform: scale(0);
+            will-change: opacity;
             
-            &--main {
-                width: 30px;
-                height: 30px;
-                background: $primary-color;
+            @media (max-width: 1200px) {
+                font-size: 6rem;
+            }
+            
+            @media (max-width: 768px) {
+                font-size: 4rem;
+            }
+        }
+        
+        .label-left {
+            // Left side
+        }
+        
+        .label-right {
+            // Right side
+        }
+    }
+    
+    // Main Layout Container
+    .main-layout {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+    }
+    
+    // Side Text Styling
+    .side-text {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        
+        h1 {
+            font-size: 8rem;
+            font-weight: 900;
+            color: $white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            
+            @media (max-width: 1200px) {
+                font-size: 6rem;
+            }
+            
+            @media (max-width: 768px) {
+                font-size: 4rem;
+            }
+        }
+    }
+    
+    .side-text-left {
+        padding-right: 2rem;
+        
+        @media (max-width: 768px) {
+            padding-right: 1rem;
+        }
+    }
+    
+    .side-text-right {
+        padding-left: 2rem;
+        
+        @media (max-width: 768px) {
+            padding-left: 1rem;
+        }
+    }
+    
+    // Anchor Kost Container - Full Height Image
+    .anchor-kost-container {
+        position: relative;
+        z-index: 3;
+        width: 400px;
+        height: 100vh;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        will-change: transform, width, height;
+        
+        @media (max-width: 1200px) {
+            width: 350px;
+        }
+        
+        @media (max-width: 768px) {
+            width: 250px;
+        }
+    }
+    
+    .anchor-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0;
+        box-shadow: none;
+        display: block;
+    }
+    
+    // Location Slides
+    .location-slide {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 3;
+        opacity: 0;
+        will-change: transform, opacity;
+        
+        @media (max-width: 768px) {
+            width: 90vw;
+        }
+    }
+    
+    .location-image-wrapper {
+        width: 500px;
+        height: 350px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        
+        @media (max-width: 768px) {
+            width: 85vw;
+            height: 55vw;
+        }
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+    
+    .location-caption {
+        margin-top: 1.5rem;
+        text-align: center;
+        color: $white;
+        opacity: 0;
+        transform: translateY(20px);
+        
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            
+            @media (max-width: 768px) {
+                font-size: 1.4rem;
+            }
+        }
+        
+        p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            
+            @media (max-width: 768px) {
+                font-size: 1rem;
+            }
+        }
+    }
+    
+    // Room Detail Overlays
+    .room-detail {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        opacity: 0;
+        visibility: hidden;
+        background: rgba(0, 0, 0, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        padding: 2rem;
+        will-change: opacity;
+        
+        @media (max-width: 968px) {
+            flex-direction: column;
+            gap: 2rem;
+            overflow-y: auto;
+        }
+    }
+    
+    .room-images {
+        flex: 1;
+        max-width: 600px;
+        
+        @media (max-width: 968px) {
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+    
+    .room-main-img {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+        display: block;
+    }
+    
+    .room-info-overlay {
+        flex: 1;
+        max-width: 500px;
+        color: $white;
+        
+        @media (max-width: 968px) {
+            max-width: 100%;
+        }
+        
+        h3 {
+            font-size: 2.5rem;
+            color: $white;
+            margin-bottom: 1rem;
+            
+            @media (max-width: 768px) {
+                font-size: 2rem;
+            }
+        }
+        
+        .room-size {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+        
+        .room-features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+            
+            li {
+                padding: 0.7rem 0;
+                padding-left: 2rem;
+                position: relative;
+                font-size: 1.1rem;
+                color: rgba(255, 255, 255, 0.9);
                 
-                &::after {
-                    content: '';
+                &::before {
+                    content: '✓';
                     position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 100%;
-                    height: 100%;
-                    background: $primary-color;
-                    border-radius: 50%;
-                    animation: pulse-ring 2s infinite;
+                    left: 0;
+                    color: $accent-color;
+                    font-weight: bold;
+                    font-size: 1.3rem;
                 }
             }
         }
         
-        .pin-label {
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: $white;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            white-space: nowrap;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-        }
-    }
-    
-    &__info {
-        background: $white;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        
-        h3 {
-            font-size: 1.5rem;
-            color: $primary-color;
-            margin-bottom: 1.5rem;
-        }
-    }
-    
-    &__list {
-        list-style: none;
-        
-        &-item {
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            opacity: 0;
-            transform: translateX(-20px);
+        .room-price-tag {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: $accent-color;
             
-            &:last-child {
-                border-bottom: none;
-            }
-            
-            .icon {
-                font-size: 1.5rem;
-                flex-shrink: 0;
-            }
-            
-            .text {
-                font-size: 1rem;
-                color: #555;
+            span {
+                font-size: 1.1rem;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 0.6);
             }
         }
     }
-}
-
-@keyframes pulse-ring {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.7;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(2);
-        opacity: 0;
-    }
-}
-
-// CTA Section
-.cta {
-    padding: 8rem 0;
-    background: linear-gradient(135deg, $primary-color, lighten($primary-color, 10%));
-    color: $white;
-    text-align: center;
-    
-    &__content {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    
-    &__title {
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-        
-        @media (max-width: 768px) {
-            font-size: 2rem;
-        }
-    }
-    
-    &__description {
-        font-size: 1.2rem;
-        margin-bottom: 3rem;
-        opacity: 0.9;
-        line-height: 1.8;
-    }
-    
-    &__buttons {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-bottom: 3rem;
-    }
-    
-    &__button {
-        padding: 1rem 2.5rem;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-decoration: none;
-        transition: $transition;
-        cursor: pointer;
-        border: 2px solid transparent;
-        display: inline-block;
-        position: relative;
-        overflow: hidden;
-        
-        .button-text {
-            position: relative;
-            z-index: 2;
-        }
-        
-        &--primary {
-            background: $accent-color;
-            color: $white;
-            animation: pulse-button 2s infinite;
-            
-            &:hover {
-                background: darken($accent-color, 10%);
-                transform: translateY(-3px);
-                box-shadow: 0 10px 30px rgba($accent-color, 0.4);
-            }
-        }
-        
-        &--secondary {
-            background: transparent;
-            color: $white;
-            border-color: $white;
-            
-            &:hover {
-                background: $white;
-                color: $primary-color;
-                transform: translateY(-3px);
-                box-shadow: 0 10px 30px rgba($white, 0.3);
-            }
-        }
-    }
-    
-    &__info {
-        font-size: 1rem;
-        opacity: 0.8;
-        
-        p {
-            margin: 0.5rem 0;
-        }
-    }
-}
-
-@keyframes pulse-button {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba($accent-color, 0.7);
-    }
-    50% {
-        box-shadow: 0 0 0 15px rgba($accent-color, 0);
-    }
-}
-
-// Footer
-.footer {
-    padding: 2rem 0;
-    background: darken($primary-color, 10%);
-    color: $white;
-    text-align: center;
-    
-    p {
-        margin: 0;
-        opacity: 0.8;
-    }
-}
-
-// Utility classes for animations
-.fade-in {
-    opacity: 0;
-}
-
-.slide-up {
-    opacity: 0;
-    transform: translateY(50px);
-}
-
-.slide-left {
-    opacity: 0;
-    transform: translateX(-50px);
-}
-
-.slide-right {
-    opacity: 0;
-    transform: translateX(50px);
 }

@@ -26,330 +26,434 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.lagSmoothing(1000, 16);
 
 // ============================================
-// HERO SECTION ANIMATIONS
+// OPENING SECTION - SUBTLE FOG REVEAL
 // ============================================
 
-// Hero title animation on load
-gsap.from('.hero__title-line', {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    stagger: 0.2,
-    ease: 'power4.out',
-    delay: 0.2
-});
+const openingSection = document.querySelector('.opening-section');
 
-gsap.from('.hero__subtitle', {
-    y: 30,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-    delay: 0.8
-});
+if (openingSection) {
+    const skyBg = document.querySelector('.sky-bg');
+    const cityBg = document.querySelector('.city-bg');
+    const cloudLayer = document.querySelector('.cloud-layer');
+    const allClouds = document.querySelectorAll('.cloud');
+    const sideLeft = document.querySelector('.side-left');
+    const sideRight = document.querySelector('.side-right');
+    const anchorCenter = document.querySelector('.anchor-center');
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    const openingLabels = document.querySelectorAll('.opening-labels h1');
 
-gsap.from('.hero__scroll-indicator', {
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-    delay: 1.2
-});
-
-// Hero parallax and fade out on scroll (OPTIMIZED)
-gsap.to('.hero__content', {
-    y: -200,
-    opacity: 0,
-    ease: 'none',
-    scrollTrigger: {
-        trigger: '.hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 0.5,
-    }
-});
-
-gsap.to('.hero__background', {
-    y: 300,
-    opacity: 0.3,
-    ease: 'none',
-    scrollTrigger: {
-        trigger: '.hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 0.5,
-    }
-});
-
-// ============================================
-// INTRO SECTION ANIMATIONS
-// ============================================
-
-gsap.from('.intro__text', {
-    opacity: 0,
-    y: 80,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-        trigger: '.intro',
-        start: 'top 70%',
-        toggleActions: 'play none none reverse'
-    }
-});
-
-gsap.from('.intro__image', {
-    opacity: 0,
-    x: 100,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-        trigger: '.intro',
-        start: 'top 70%',
-        toggleActions: 'play none none reverse'
-    }
-});
-
-// ============================================
-// FASILITAS SECTION - HORIZONTAL SCROLL
-// ============================================
-
-const fasilitasSection = document.querySelector('.fasilitas');
-const fasilitasContainer = document.querySelector('.fasilitas__scroll-container');
-
-if (fasilitasSection && fasilitasContainer) {
-    // Calculate the scroll width
-    const getScrollAmount = () => {
-        const scrollWidth = fasilitasContainer.scrollWidth;
-        return -(scrollWidth - window.innerWidth);
-    };
-
-    // Pin the section and create horizontal scroll (OPTIMIZED)
-    const fasilitasTween = gsap.to(fasilitasContainer, {
-        x: getScrollAmount,
-        ease: 'none',
+    // Create opening timeline
+    const openingTimeline = gsap.timeline({
         scrollTrigger: {
-            trigger: '.fasilitas',
+            trigger: '.opening-section',
             start: 'top top',
-            end: () => `+=${fasilitasContainer.scrollWidth - window.innerWidth}`,
+            end: '+=120%', // Slightly longer for smooth transition
             pin: true,
-            scrub: 0.5,
-            invalidateOnRefresh: true,
+            scrub: 0.8,
             anticipatePin: 1,
         }
     });
 
-    // Animate items as they come into view during horizontal scroll (OPTIMIZED)
-    gsap.utils.toArray('.fasilitas__item').forEach((item, index) => {
-        gsap.from(item, {
+    openingTimeline
+        // Phase 1: Fade scroll indicator (0-0.2)
+        .to(scrollIndicator, {
             opacity: 0,
-            scale: 0.9,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: item,
-                containerAnimation: fasilitasTween,
-                start: 'left 90%',
-                end: 'left 50%',
-                scrub: 0.5,
-            }
-        });
-    });
-}
+            y: 20,
+            duration: 0.2,
+            ease: 'power2.out'
+        }, 0)
 
+        // Phase 2: All clouds drift downward and fade (0.2-0.7)
+        .to(allClouds, {
+            y: '100vh',
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.inOut',
+            stagger: 0.03
+        }, 0.2)
+
+        // Phase 3: Labels fade out as clouds disappear (0.4-0.7)
+        .to(openingLabels, {
+            opacity: 0,
+            y: -30,
+            duration: 0.3,
+            ease: 'power2.inOut'
+        }, 0.4)
+
+        // Phase 4: Background transition (0.4-0.8)
+        .to(skyBg, {
+            opacity: 0,
+            duration: 0.4,
+            ease: 'power2.inOut'
+        }, 0.4)
+        .to(cityBg, {
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power2.inOut'
+        }, 0.4)
+
+        // Phase 5: Side images slide out dramatically (0.6-1.0)
+        .to(sideLeft, {
+            x: '-120%',
+            opacity: 0,
+            duration: 0.4,
+            ease: 'power2.in'
+        }, 0.6)
+        .to(sideRight, {
+            x: '120%',
+            opacity: 0,
+            duration: 0.4,
+            ease: 'power2.in'
+        }, 0.6)
+
+        // Phase 6: Anchor image subtle zoom and glow (0.7-1.0)
+        .to(anchorCenter, {
+            scale: 1.1,
+            filter: 'drop-shadow(0 50px 100px rgba(0, 0, 0, 0.5))',
+            duration: 0.3,
+            ease: 'power1.inOut'
+        }, 0.7);
+}// ============================================
+// CINEMATIC LOCATION & ROOM SECTION
 // ============================================
-// KAMAR SECTION - IMAGE REVEAL ANIMATION
-// ============================================
 
-gsap.utils.toArray('.kamar__item').forEach((item, index) => {
-    const imageReveal = item.querySelector('.kamar__image-reveal');
-    const image = item.querySelector('.kamar__image');
-    const info = item.querySelector('.kamar__info');
+const cinematicSection = document.querySelector('.cinematic-section');
 
-    // Create a timeline for each room (OPTIMIZED)
-    const tl = gsap.timeline({
+if (cinematicSection) {
+    const anchorKost = document.querySelector('.anchor-kost-container');
+    const anchorImage = document.querySelector('.anchor-image');
+
+    // Cinematic labels
+    const labelLeft = document.querySelector('.label-left');
+    const labelRight = document.querySelector('.label-right');
+
+    // Location slides
+    const locationUKSW = document.querySelector('.location-uksw');
+    const locationCafe = document.querySelector('.location-cafe');
+    const locationMall = document.querySelector('.location-mall');
+    const locationStasiun = document.querySelector('.location-stasiun');
+    const locationKuliner = document.querySelector('.location-kuliner');
+
+    // Room details
+    const roomDetail1 = document.querySelector('.room-detail-1');
+    const roomDetail2 = document.querySelector('.room-detail-2');
+
+    // Create main timeline
+    const cinematicTimeline = gsap.timeline({
         scrollTrigger: {
-            trigger: item,
-            start: 'top 75%',
-            end: 'bottom 25%',
-            toggleActions: 'play none none reverse'
+            trigger: '.cinematic-section',
+            start: 'top top',
+            end: '+=600%', // 6x viewport height for smooth long scroll
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
         }
     });
 
-    // Image reveal effect using clip-path (OPTIMIZED)
-    tl.to(imageReveal, {
-        clipPath: 'inset(0 0% 0 0)',
-        duration: 1,
-        ease: 'power3.inOut'
-    })
-    .to(image, {
-        scale: 1,
-        duration: 1,
-        ease: 'power3.inOut'
-    }, 0);    // Animate info section
-    gsap.from(info, {
-        opacity: 0,
-        x: index % 2 === 0 ? 50 : -50,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: item,
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-        }
-    });
-});
-
-// ============================================
-// LOKASI SECTION - PIN ANIMATIONS
-// ============================================
-
-// Animate pins appearing one by one
-const pins = document.querySelectorAll('.lokasi__pin');
-pins.forEach((pin, index) => {
-    const dot = pin.querySelector('.pin-dot');
-    const label = pin.querySelector('.pin-label');
-
-    gsap.to(dot, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.5,
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-            trigger: '.lokasi',
-            start: 'top 60%',
-            toggleActions: 'play none none reverse'
-        },
-        delay: index * 0.2
-    });
-
-    gsap.to(label, {
-        opacity: 1,
-        duration: 0.5,
-        ease: 'power2.out',
-        scrollTrigger: {
-            trigger: '.lokasi',
-            start: 'top 60%',
-            toggleActions: 'play none none reverse'
-        },
-        delay: index * 0.2 + 0.3
-    });
-});
-
-// Animate location list items
-const locationItems = document.querySelectorAll('.lokasi__list-item');
-locationItems.forEach((item, index) => {
-    gsap.to(item, {
-        opacity: 1,
-        x: 0,
-        duration: 0.6,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: '.lokasi__info',
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-        },
-        delay: index * 0.15
-    });
-});
-
-// ============================================
-// CTA SECTION - BUTTON PULSE ANIMATION
-// ============================================
-
-// Additional pulse animation for primary button on scroll into view
-gsap.from('.cta__button--primary', {
-    scale: 0.8,
-    opacity: 0,
-    duration: 0.8,
-    ease: 'back.out(1.7)',
-    scrollTrigger: {
-        trigger: '.cta',
-        start: 'top 70%',
-        toggleActions: 'play none none reverse'
-    }
-});
-
-gsap.from('.cta__button--secondary', {
-    scale: 0.8,
-    opacity: 0,
-    duration: 0.8,
-    ease: 'back.out(1.7)',
-    scrollTrigger: {
-        trigger: '.cta',
-        start: 'top 70%',
-        toggleActions: 'play none none reverse'
-    },
-    delay: 0.2
-});
-
-// Animate CTA content
-gsap.from('.cta__title', {
-    y: 50,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-        trigger: '.cta',
-        start: 'top 70%',
-        toggleActions: 'play none none reverse'
-    }
-});
-
-gsap.from('.cta__description', {
-    y: 30,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-        trigger: '.cta',
-        start: 'top 70%',
-        toggleActions: 'play none none reverse'
-    },
-    delay: 0.2
-});
-
-gsap.from('.cta__info p', {
-    y: 20,
-    opacity: 0,
-    duration: 0.6,
-    stagger: 0.1,
-    ease: 'power3.out',
-    scrollTrigger: {
-        trigger: '.cta__info',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse'
-    }
-});
-
-// ============================================
-// ADDITIONAL INTERACTIONS
-// ============================================
-
-// Add hover effect to location pins
-pins.forEach(pin => {
-    pin.addEventListener('mouseenter', () => {
-        gsap.to(pin.querySelector('.pin-dot'), {
-            scale: 1.3,
+    // ========== INTRO: Fade in KOST & MERDEKA labels ==========
+    cinematicTimeline
+        .to([labelLeft, labelRight], {
+            opacity: 1,
             duration: 0.3,
             ease: 'power2.out'
-        });
-        gsap.to(pin.querySelector('.pin-label'), {
-            y: -5,
-            duration: 0.3,
-            ease: 'power2.out'
-        });
-    });
+        }, 0)
 
-    pin.addEventListener('mouseleave', () => {
-        gsap.to(pin.querySelector('.pin-dot'), {
-            scale: 1,
-            duration: 0.3,
-            ease: 'power2.out'
-        });
-        gsap.to(pin.querySelector('.pin-label'), {
+        // ========== SEQUENCE 1: UKSW ==========
+        // Anchor moves to left, UKSW slides in from right
+        .to(anchorKost, {
+            left: '25%',
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0)
+        .fromTo(locationUKSW,
+            {
+                right: '-100%',
+                opacity: 0
+            },
+            {
+                right: '8%',
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.inOut'
+            }, 0.3)
+        .to(locationUKSW.querySelector('.location-caption'), {
+            opacity: 1,
             y: 0,
-            duration: 0.3,
+            duration: 0.5,
             ease: 'power2.out'
+        }, 1.2)
+
+        // Hold for a moment
+        .to({}, { duration: 0.5 })
+
+        // ========== SEQUENCE 2: CAFE ==========
+        // UKSW slides out, Anchor moves right, Cafe slides in from left
+        .to(locationUKSW, {
+            right: '-100%',
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        })
+        .to(anchorKost, {
+            left: '70%',
+            duration: 1,
+            ease: 'power2.inOut'
+        }, '<')
+        .fromTo(locationCafe,
+            {
+                left: '-100%',
+                opacity: 0
+            },
+            {
+                left: '8%',
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.inOut'
+            }, '<0.3')
+        .to(locationCafe.querySelector('.location-caption'), {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out'
+        })
+
+        // Hold
+        .to({}, { duration: 0.5 })
+
+        // ========== SEQUENCE 3: MALL ==========
+        // Cafe slides out, Anchor moves left, Mall slides in from right
+        .to(locationCafe, {
+            left: '-100%',
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        })
+        .to(anchorKost, {
+            left: '25%',
+            duration: 1,
+            ease: 'power2.inOut'
+        }, '<')
+        .fromTo(locationMall,
+            {
+                right: '-100%',
+                opacity: 0
+            },
+            {
+                right: '8%',
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.inOut'
+            }, '<0.3')
+        .to(locationMall.querySelector('.location-caption'), {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out'
+        })
+
+        // Hold
+        .to({}, { duration: 0.5 })
+
+        // ========== SEQUENCE 4: STASIUN ==========
+        // Mall slides out, Anchor moves right, Stasiun slides in from left
+        .to(locationMall, {
+            right: '-100%',
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        })
+        .to(anchorKost, {
+            left: '70%',
+            duration: 1,
+            ease: 'power2.inOut'
+        }, '<')
+        .fromTo(locationStasiun,
+            {
+                left: '-100%',
+                opacity: 0
+            },
+            {
+                left: '8%',
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.inOut'
+            }, '<0.3')
+        .to(locationStasiun.querySelector('.location-caption'), {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out'
+        })
+
+        // Hold
+        .to({}, { duration: 0.5 })
+
+        // ========== SEQUENCE 5: KULINER ==========
+        // Stasiun slides out, Anchor moves left, Kuliner slides in from right
+        .to(locationStasiun, {
+            left: '-100%',
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        })
+        .to(anchorKost, {
+            left: '25%',
+            duration: 1,
+            ease: 'power2.inOut'
+        }, '<')
+        .fromTo(locationKuliner,
+            {
+                right: '-100%',
+                opacity: 0
+            },
+            {
+                right: '8%',
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.inOut'
+            }, '<0.3')
+        .to(locationKuliner.querySelector('.location-caption'), {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out'
+        })
+
+        // Hold
+        .to({}, { duration: 0.5 })
+
+        // ========== TRANSITION TO ROOM DETAILS ==========
+        // Kuliner slides out, Anchor moves to center
+        .to(locationKuliner, {
+            right: '-100%',
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        })
+        .to(anchorKost, {
+            left: '50%',
+            duration: 1,
+            ease: 'power2.inOut'
+        }, '<')
+
+        // Hold at center
+        .to({}, { duration: 0.3 })
+
+        // ========== ZOOM TO ROOM 1 ==========
+        // Zoom in effect - scale and position
+        .to(anchorKost, {
+            width: '100vw',
+            height: '100vh',
+            top: '50%',
+            left: '50%',
+            duration: 1.5,
+            ease: 'power2.inOut'
+        })
+        .to(anchorImage, {
+            scale: 2,
+            x: '-15%',
+            y: '-10%',
+            duration: 1.5,
+            ease: 'power2.inOut'
+        }, '<')
+
+        // Fade to Room Detail 1
+        .to(roomDetail1, {
+            opacity: 1,
+            visibility: 'visible',
+            duration: 0.8,
+            ease: 'power2.inOut'
+        })
+
+        // Hold to view Room 1
+        .to({}, { duration: 1 })
+
+        // ========== ZOOM OUT AND ZOOM TO ROOM 2 ==========
+        // Fade out Room 1 detail
+        .to(roomDetail1, {
+            opacity: 0,
+            visibility: 'hidden',
+            duration: 0.5,
+            ease: 'power2.inOut'
+        })
+
+        // Zoom out to full building
+        .to(anchorImage, {
+            scale: 1,
+            x: '0%',
+            y: '0%',
+            duration: 1,
+            ease: 'power2.inOut'
+        })
+        .to(anchorKost, {
+            width: '600px',
+            height: '400px',
+            duration: 1,
+            ease: 'power2.inOut'
+        }, '<')
+
+        // Brief hold
+        .to({}, { duration: 0.3 })
+
+        // Zoom in to Room 2 (different window)
+        .to(anchorKost, {
+            width: '100vw',
+            height: '100vh',
+            duration: 1.5,
+            ease: 'power2.inOut'
+        })
+        .to(anchorImage, {
+            scale: 2,
+            x: '15%',
+            y: '10%',
+            duration: 1.5,
+            ease: 'power2.inOut'
+        }, '<')
+
+        // Fade to Room Detail 2
+        .to(roomDetail2, {
+            opacity: 1,
+            visibility: 'visible',
+            duration: 0.8,
+            ease: 'power2.inOut'
+        })
+
+        // Hold to view Room 2
+        .to({}, { duration: 1 })
+
+        // ========== FINAL: ZOOM OUT ==========
+        // Fade out Room 2
+        .to(roomDetail2, {
+            opacity: 0,
+            visibility: 'hidden',
+            duration: 0.5,
+            ease: 'power2.inOut'
+        })
+
+        // Zoom out to normal
+        .to(anchorImage, {
+            scale: 1,
+            x: '0%',
+            y: '0%',
+            duration: 1.2,
+            ease: 'power2.inOut'
+        })
+        .to(anchorKost, {
+            width: '600px',
+            height: '400px',
+            duration: 1.2,
+            ease: 'power2.inOut'
+        }, '<')
+
+        // Fade out entire section
+        .to(cinematicSection, {
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.inOut'
         });
-    });
-});
+
+    console.log('🎬 Cinematic section initialized with', cinematicTimeline.duration(), 'second duration');
+}
 
 // Smooth anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
