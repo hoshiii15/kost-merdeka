@@ -17,8 +17,8 @@
 </head>
 
 <body>
-    <!-- Opening Section with Cloud Reveal -->
-    <section class="opening-section" id="opening">
+    <!-- Main Scrollytelling Container -->
+    <section class="scrollytelling-container" id="main">
         <!-- Sky Background (initial) -->
         <div class="sky-bg"></div>
 
@@ -35,8 +35,8 @@
             </div>
         </div>
 
-        <!-- Center: Anchor Image -->
-        <div class="anchor-center">
+        <!-- Center: Anchor Image (transitions from opening to cinematic) -->
+        <div class="anchor-main">
             <img src="assets/images/anchor.png" alt="Kost Merdeka">
         </div>
 
@@ -52,141 +52,27 @@
             <img src="assets/images/clouds.png" class="cloud cloud-8" alt="">
         </div>
 
-        <!-- Text Labels: KOST & MERDEKA (top corners, always visible) -->
-        <div class="opening-labels">
-            <h1 class="label-kost">KOST</h1>
-            <h1 class="label-merdeka">MERDEKA</h1>
+        <!-- Balairung Slide (comes from left after opening animation) -->
+        <div class="balairung-slide">
+            <div class="location-image">
+                <img src="assets/images/balairung.png" alt="Balairung UKSW">
+            </div>
+            <div class="location-info">
+                <h2>Universitas Kristen Satya Wacana</h2>
+                <p>5 menit akses ke Universitas Kristen Satya Wacana Diponegoro</p>
+            </div>
+        </div>
+
+        <!-- Text Labels: KOST & MERDEKA -->
+        <div class="main-labels">
+            <h1 class="label-left">KOST</h1>
+            <h1 class="label-right">MERDEKA</h1>
         </div>
 
         <!-- Scroll Indicator -->
         <div class="scroll-indicator">
             <div class="scroll-arrow"></div>
             <span>Scroll to Explore</span>
-        </div>
-    </section>
-
-    <!-- Cinematic Location & Room Section -->
-    <section class="cinematic-section" id="cinematic">
-        <!-- Background Salatiga City -->
-        <div class="cinematic-bg"></div>
-
-        <!-- Main Layout: Text + Anchor Image + Text -->
-        <div class="main-layout">
-            <!-- Left Text: KOST -->
-            <div class="side-text side-text-left">
-                <h1>KOST</h1>
-            </div>
-
-            <!-- Anchor Image - Gedung Kost (Vertical Center) -->
-            <div class="anchor-kost-container">
-                <img src="assets/images/anchor.png" alt="Gedung Kost Merdeka" class="anchor-image">
-            </div>
-
-            <!-- Right Text: MERDEKA -->
-            <div class="side-text side-text-right">
-                <h1>MERDEKA</h1>
-            </div>
-        </div>
-
-        <!-- Text Labels (visible after opening) -->
-        <div class="cinematic-labels">
-            <h1 class="label-left">KOST</h1>
-            <h1 class="label-right">MERDEKA</h1>
-        </div>
-
-        <!-- Location 1: UKSW -->
-        <div class="location-slide location-uksw">
-            <div class="location-image-wrapper">
-                <img src="assets/images/balairung.png" alt="Universitas Satya Wacana">
-            </div>
-            <div class="location-caption">
-                <h3>Universitas Satya Wacana</h3>
-                <p>Hanya 5 menit berkendara</p>
-            </div>
-        </div>
-
-        <!-- Location 2: Cafe -->
-        <div class="location-slide location-cafe">
-            <div class="location-image-wrapper">
-                <img src="assets/images/fti.png" alt="Cafe Terdekat">
-            </div>
-            <div class="location-caption">
-                <h3>Cafe & Co-working Space</h3>
-                <p>Area nongkrong & belajar - 3 menit jalan kaki</p>
-            </div>
-        </div>
-
-        <!-- Location 3: Mall -->
-        <div class="location-slide location-mall">
-            <div class="location-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=800&h=600&fit=crop" alt="Mall">
-            </div>
-            <div class="location-caption">
-                <h3>Ramayana Mall Salatiga</h3>
-                <p>Pusat perbelanjaan - 7 menit berkendara</p>
-            </div>
-        </div>
-
-        <!-- Location 4: Stasiun -->
-        <div class="location-slide location-stasiun">
-            <div class="location-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=800&h=600&fit=crop"
-                    alt="Stasiun">
-            </div>
-            <div class="location-caption">
-                <h3>Stasiun Salatiga</h3>
-                <p>Akses transportasi mudah - 10 menit</p>
-            </div>
-        </div>
-
-        <!-- Location 5: Kuliner -->
-        <div class="location-slide location-kuliner">
-            <div class="location-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&h=600&fit=crop" alt="Kuliner">
-            </div>
-            <div class="location-caption">
-                <h3>Pusat Kuliner</h3>
-                <p>Berbagai pilihan makanan - 2 menit</p>
-            </div>
-        </div>
-
-        <!-- Room Detail Overlay - Type 1 -->
-        <div class="room-detail room-detail-1">
-            <div class="room-images">
-                <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop"
-                    alt="Kamar Standard" class="room-main-img">
-            </div>
-            <div class="room-info-overlay">
-                <h3>Kamar Standard</h3>
-                <p class="room-size">3 x 3 meter</p>
-                <ul class="room-features-list">
-                    <li>Kasur Single + Lemari</li>
-                    <li>AC</li>
-                    <li>Kamar Mandi Dalam</li>
-                    <li>Meja Belajar</li>
-                </ul>
-                <p class="room-price-tag">Rp 1.500.000<span>/bulan</span></p>
-            </div>
-        </div>
-
-        <!-- Room Detail Overlay - Type 2 -->
-        <div class="room-detail room-detail-2">
-            <div class="room-images">
-                <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&h=600&fit=crop"
-                    alt="Kamar Deluxe" class="room-main-img">
-            </div>
-            <div class="room-info-overlay">
-                <h3>Kamar Deluxe</h3>
-                <p class="room-size">4 x 4 meter</p>
-                <ul class="room-features-list">
-                    <li>Kasur Queen + Lemari Besar</li>
-                    <li>AC + Kipas Angin</li>
-                    <li>Kamar Mandi + Water Heater</li>
-                    <li>Meja Belajar Ergonomis</li>
-                    <li>Smart TV 32"</li>
-                </ul>
-                <p class="room-price-tag">Rp 2.500.000<span>/bulan</span></p>
-            </div>
         </div>
     </section>
 
