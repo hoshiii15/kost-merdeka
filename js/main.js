@@ -117,9 +117,10 @@ if (mainContainer) {
         }, 0.35)
 
         // ========== PHASE 3: BALAIRUNG REVEAL (50-62.5% scroll) ==========
-        // Anchor moves right
+        // Anchor scales down and moves far right
         .to(anchorMain, {
-            x: '35%',
+            x: '90%',
+            scale: 0.6,
             duration: 0.15,
             ease: 'power2.inOut'
         }, 0.5)
@@ -129,7 +130,7 @@ if (mainContainer) {
             left: '-100%',
             opacity: 0
         }, {
-            left: '8%',
+            left: '5%',
             opacity: 1,
             duration: 0.15,
             ease: 'power2.inOut'
@@ -147,9 +148,10 @@ if (mainContainer) {
             ease: 'power2.inOut'
         }, 0.75)
 
-        // Anchor moves back to center
+        // Anchor moves back to center and restore scale
         .to(anchorMain, {
             x: '0%',
+            scale: 1,
             duration: 0.15,
             ease: 'power2.inOut'
         }, 0.75)
@@ -159,15 +161,16 @@ if (mainContainer) {
             right: '-100%',
             opacity: 0
         }, {
-            right: '8%',
+            right: '5%',
             opacity: 1,
             duration: 0.15,
             ease: 'power2.inOut'
         }, 0.8)
 
-        // Anchor moves left to make room for SPBU
+        // Anchor moves far left and scales down for SPBU
         .to(anchorMain, {
-            x: '-35%',
+            x: '-90%',
+            scale: 0.6,
             duration: 0.15,
             ease: 'power2.inOut'
         }, 0.8)
@@ -184,9 +187,10 @@ if (mainContainer) {
             ease: 'power2.inOut'
         }, 0.95)
 
-        // Anchor moves back to center
+        // Anchor moves back to center and restore scale
         .to(anchorMain, {
             x: '0%',
+            scale: 1,
             duration: 0.15,
             ease: 'power2.inOut'
         }, 0.95)
@@ -196,15 +200,16 @@ if (mainContainer) {
             left: '-100%',
             opacity: 0
         }, {
-            left: '8%',
+            left: '5%',
             opacity: 1,
             duration: 0.15,
             ease: 'power2.inOut'
         }, 1.0)
 
-        // Anchor moves right to make room for Toll
+        // Anchor moves far right and scales down for Toll
         .to(anchorMain, {
-            x: '35%',
+            x: '90%',
+            scale: 0.6,
             duration: 0.15,
             ease: 'power2.inOut'
         }, 1.0)
