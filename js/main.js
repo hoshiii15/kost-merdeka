@@ -41,13 +41,15 @@ if (mainContainer) {
     const sideRight = document.querySelector('.side-right');
     const anchorMain = document.querySelector('.anchor-main');
     const balairungSlide = document.querySelector('.balairung-slide');
+    const spbuSlide = document.querySelector('.spbu-slide');
+    const tollSlide = document.querySelector('.toll-slide');
 
     // Create unified seamless timeline
     const mainTimeline = gsap.timeline({
         scrollTrigger: {
             trigger: '.scrollytelling-container',
             start: 'top top',
-            end: '+=400%', // 4x viewport height for smooth continuous scroll
+            end: '+=800%', // 8x viewport height for all slides
             pin: true,
             scrub: 1,
             anticipatePin: 1,
@@ -106,7 +108,7 @@ if (mainContainer) {
             ease: 'power2.out'
         }, 0.2)
 
-    // ========== PHASE 2: TRANSITION (25-50% scroll) ==========
+        // ========== PHASE 2: TRANSITION (25-50% scroll) ==========
         // Hold anchor in center briefly with subtle pulse
         .to(anchorMain, {
             scale: 1.05,
@@ -114,14 +116,14 @@ if (mainContainer) {
             ease: 'power1.inOut'
         }, 0.35)
 
-    // ========== PHASE 3: BALAIRUNG REVEAL (50-100% scroll) ==========
+        // ========== PHASE 3: BALAIRUNG REVEAL (50-62.5% scroll) ==========
         // Anchor moves right
         .to(anchorMain, {
             x: '35%',
-            duration: 0.3,
+            duration: 0.15,
             ease: 'power2.inOut'
         }, 0.5)
-        
+
         // Balairung slides in from left simultaneously
         .fromTo(balairungSlide, {
             left: '-100%',
@@ -129,14 +131,88 @@ if (mainContainer) {
         }, {
             left: '8%',
             opacity: 1,
-            duration: 0.3,
+            duration: 0.15,
             ease: 'power2.inOut'
         }, 0.5)
 
-        // Hold the final state
-        .to({}, { duration: 0.2 });
+        // Hold Balairung
+        .to({}, { duration: 0.1 }, 0.65)
 
-    console.log('🎬 Seamless scrollytelling initialized - 400% scroll distance');
+        // ========== PHASE 4: BALAIRUNG EXIT & SPBU ENTER (62.5-75% scroll) ==========
+        // Balairung slides out to left
+        .to(balairungSlide, {
+            left: '-100%',
+            opacity: 0,
+            duration: 0.15,
+            ease: 'power2.inOut'
+        }, 0.75)
+
+        // Anchor moves back to center
+        .to(anchorMain, {
+            x: '0%',
+            duration: 0.15,
+            ease: 'power2.inOut'
+        }, 0.75)
+
+        // SPBU slides in from right
+        .fromTo(spbuSlide, {
+            right: '-100%',
+            opacity: 0
+        }, {
+            right: '8%',
+            opacity: 1,
+            duration: 0.15,
+            ease: 'power2.inOut'
+        }, 0.8)
+
+        // Anchor moves left to make room for SPBU
+        .to(anchorMain, {
+            x: '-35%',
+            duration: 0.15,
+            ease: 'power2.inOut'
+        }, 0.8)
+
+        // Hold SPBU
+        .to({}, { duration: 0.1 }, 0.9)
+
+        // ========== PHASE 5: SPBU EXIT & TOLL ENTER (87.5-100% scroll) ==========
+        // SPBU slides out to right
+        .to(spbuSlide, {
+            right: '-100%',
+            opacity: 0,
+            duration: 0.15,
+            ease: 'power2.inOut'
+        }, 0.95)
+
+        // Anchor moves back to center
+        .to(anchorMain, {
+            x: '0%',
+            duration: 0.15,
+            ease: 'power2.inOut'
+        }, 0.95)
+
+        // Toll Gate slides in from left
+        .fromTo(tollSlide, {
+            left: '-100%',
+            opacity: 0
+        }, {
+            left: '8%',
+            opacity: 1,
+            duration: 0.15,
+            ease: 'power2.inOut'
+        }, 1.0)
+
+        // Anchor moves right to make room for Toll
+        .to(anchorMain, {
+            x: '35%',
+            duration: 0.15,
+            ease: 'power2.inOut'
+        }, 1.0)
+
+        // Hold final state
+        .to({}, { duration: 0.15 });
+
+    console.log('🎬 Seamless scrollytelling initialized - 800% scroll distance with all locations');
 }
 
 // Smooth anchor links

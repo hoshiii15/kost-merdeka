@@ -473,3 +473,53 @@ body {
   }
 }
 
+/* SPBU Location Slide (from right) */
+.scrollytelling-container .spbu-slide {
+  position: absolute;
+  top: 50%;
+  right: -100%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+@media (max-width: 1200px) {
+  .scrollytelling-container .spbu-slide {
+    gap: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .scrollytelling-container .spbu-slide {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+}
+
+/* Toll Gate Location Slide (from left) */
+.scrollytelling-container .toll-slide {
+  position: absolute;
+  top: 50%;
+  left: -100%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+@media (max-width: 1200px) {
+  .scrollytelling-container .toll-slide {
+    gap: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .scrollytelling-container .toll-slide {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
