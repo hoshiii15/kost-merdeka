@@ -308,7 +308,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&h=1080&fit=crop") center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("../assets/images/salatiga.jpg") center/cover;
   z-index: 2;
   opacity: 0;
   will-change: opacity;
@@ -409,12 +409,12 @@ body {
   mask-image: radial-gradient(ellipse 80% 80% at center, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 80%, transparent 100%);
 }
 .scrollytelling-container .cloud.cloud-1 {
-  bottom: -10%;
+  bottom: 0%;
   left: 0%;
   width: 400px;
-  transform: scale(1.2);
+  transform: scale(1.5);
   z-index: 100;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 @media (max-width: 768px) {
   .scrollytelling-container .cloud.cloud-1 {
@@ -422,12 +422,12 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-2 {
-  bottom: -5%;
+  bottom: 5%;
   left: 20%;
   width: 350px;
-  transform: scale(0.9) scaleX(-1);
+  transform: scale(1.2) scaleX(-1);
   z-index: 95;
-  opacity: 0.88;
+  opacity: 0.9;
 }
 @media (max-width: 768px) {
   .scrollytelling-container .cloud.cloud-2 {
@@ -435,13 +435,13 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-3 {
-  bottom: 0;
+  bottom: 10%;
   left: 49%;
-  transform: translateX(-50%) scale(1.1);
+  transform: translateX(-50%) scale(1.4);
   height: 200px;
   width: 450px;
   z-index: 96;
-  opacity: 0.92;
+  opacity: 0.94;
 }
 @media (max-width: 768px) {
   .scrollytelling-container .cloud.cloud-3 {
@@ -449,12 +449,12 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-4 {
-  bottom: -5%;
+  bottom: 5%;
   right: 20%;
   width: 350px;
-  transform: scale(0.95);
+  transform: scale(1.25);
   z-index: 85;
-  opacity: 0.87;
+  opacity: 0.89;
 }
 @media (max-width: 768px) {
   .scrollytelling-container .cloud.cloud-4 {
@@ -462,12 +462,12 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-5 {
-  bottom: -10%;
+  bottom: 0%;
   right: 0%;
   width: 400px;
-  transform: scale(1.15) scaleX(-1);
+  transform: scale(1.5) scaleX(-1);
   z-index: 80;
-  opacity: 0.89;
+  opacity: 0.91;
 }
 @media (max-width: 768px) {
   .scrollytelling-container .cloud.cloud-5 {
@@ -475,11 +475,11 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-6 {
-  bottom: 20%;
+  bottom: 25%;
   left: 10%;
   width: 300px;
-  opacity: 0.65;
-  transform: scale(0.8);
+  opacity: 0.7;
+  transform: scale(1.0);
   z-index: 75;
 }
 @media (max-width: 768px) {
@@ -488,11 +488,11 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-7 {
-  bottom: 25%;
+  bottom: 30%;
   right: 12%;
   width: 280px;
-  opacity: 0.6;
-  transform: scale(0.75) scaleX(-1);
+  opacity: 0.68;
+  transform: scale(0.95) scaleX(-1);
   z-index: 70;
 }
 @media (max-width: 768px) {
@@ -501,11 +501,11 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-8 {
-  bottom: 15%;
+  bottom: 20%;
   left: 50%;
-  transform: translateX(-50%) scale(0.7);
+  transform: translateX(-50%) scale(0.9);
   width: 320px;
-  opacity: 0.55;
+  opacity: 0.65;
   z-index: 65;
 }
 @media (max-width: 768px) {
@@ -514,12 +514,12 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-9 {
-  bottom: 5%;
+  bottom: 12%;
   left: 10%;
   width: 380px;
-  transform: scale(1.3) rotate(5deg);
+  transform: scale(1.5) rotate(5deg);
   z-index: 98;
-  opacity: 0.88;
+  opacity: 0.91;
 }
 @media (max-width: 768px) {
   .scrollytelling-container .cloud.cloud-9 {
@@ -527,12 +527,12 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-10 {
-  bottom: 8%;
+  bottom: 15%;
   left: 35%;
   width: 360px;
-  transform: scale(1.25) scaleX(-1);
+  transform: scale(1.4) scaleX(-1);
   z-index: 92;
-  opacity: 0.86;
+  opacity: 0.89;
 }
 @media (max-width: 768px) {
   .scrollytelling-container .cloud.cloud-10 {
@@ -540,12 +540,12 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-11 {
-  bottom: 6%;
+  bottom: 13%;
   right: 10%;
   width: 390px;
-  transform: scale(1.35) rotate(-8deg);
+  transform: scale(1.55) rotate(-8deg);
   z-index: 97;
-  opacity: 0.89;
+  opacity: 0.92;
 }
 @media (max-width: 768px) {
   .scrollytelling-container .cloud.cloud-11 {
@@ -553,12 +553,12 @@ body {
   }
 }
 .scrollytelling-container .cloud.cloud-12 {
-  bottom: 9%;
+  bottom: 16%;
   right: 35%;
   width: 370px;
-  transform: scale(1.28) scaleX(-1) rotate(6deg);
+  transform: scale(1.45) scaleX(-1) rotate(6deg);
   z-index: 93;
-  opacity: 0.87;
+  opacity: 0.9;
 }
 @media (max-width: 768px) {
   .scrollytelling-container .cloud.cloud-12 {
