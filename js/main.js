@@ -23,6 +23,103 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.lagSmoothing(1000, 16);
 
 // ============================================
+// OPENING CLOUD CURTAIN ANIMATION
+// ============================================
+
+window.addEventListener('load', () => {
+    const cloudCurtainLeft = document.querySelector('.cloud-curtain-left');
+    const cloudCurtainRight = document.querySelector('.cloud-curtain-right');
+    const cloudCurtain = document.querySelector('.cloud-curtain');
+    const leftClouds = document.querySelectorAll('.cloud-curtain-left .curtain-cloud');
+    const rightClouds = document.querySelectorAll('.cloud-curtain-right .curtain-cloud');
+
+    // Get the three main images
+    const anchorMain = document.querySelector('.anchor-main');
+    const sideLeft = document.querySelector('.side-left');
+    const sideRight = document.querySelector('.side-right');
+
+    // Set initial small scale for images
+    gsap.set([anchorMain, sideLeft, sideRight], {
+        scale: 0.3,
+        opacity: 0.6
+    });
+
+    // Disable scroll during opening animation
+    document.body.style.overflow = 'hidden';
+
+    // Opening animation timeline
+    const openingTimeline = gsap.timeline({
+        onComplete: () => {
+            // Enable scroll after animation
+            document.body.style.overflow = 'auto';
+            // Remove curtain from DOM
+            cloudCurtain.style.display = 'none';
+        }
+    });
+
+    openingTimeline
+        // Hold the curtain for a moment
+        .to({}, { duration: 0.8 })
+
+        // Clouds on the left drift to the left with stagger
+        .to(leftClouds, {
+            x: '-120vw',
+            opacity: 0,
+            duration: 1.8,
+            ease: 'power2.inOut',
+            stagger: {
+                amount: 0.3,
+                from: 'random'
+            }
+        }, 0.8)
+
+        // Clouds on the right drift to the right with stagger
+        .to(rightClouds, {
+            x: '120vw',
+            opacity: 0,
+            duration: 1.8,
+            ease: 'power2.inOut',
+            stagger: {
+                amount: 0.3,
+                from: 'random'
+            }
+        }, 0.8)
+
+        // Fade out the entire curtain container
+        .to(cloudCurtain, {
+            opacity: 0,
+            duration: 0.4,
+            ease: 'power2.out'
+        }, 2.2)
+
+        // Zoom in the three main images after clouds clear
+        .to(anchorMain, {
+            scale: 1,
+            opacity: 1,
+            duration: 1.2,
+            ease: 'back.out(1.2)',
+            force3D: true
+        }, 2.3)
+        .to(sideLeft, {
+            scale: 1,
+            opacity: 1,
+            duration: 1.2,
+            ease: 'back.out(1.2)',
+            force3D: true
+        }, 2.35)
+        .to(sideRight, {
+            scale: 1,
+            opacity: 1,
+            duration: 1.2,
+            ease: 'back.out(1.2)',
+            force3D: true
+        }, 2.4);
+
+    console.log('🌥️ Cloud curtain opening animation initialized - 28 transparent clouds for full coverage');
+    console.log('🎬 Image zoom animation added - anchor, balairung, and fti will zoom in after clouds');
+});
+
+// ============================================
 // SEAMLESS SCROLLYTELLING ANIMATION
 // ============================================
 
